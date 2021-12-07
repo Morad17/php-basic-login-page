@@ -17,8 +17,8 @@ if (isset($_POST['submit'])) {
         header("location: ../signup.php?error=emptyinput");
         exit();
     }
-    if (invalidUserid($username) !== false) {
-        header("location: ../signup.php?error=invaliduserid");
+    if (invalidUsername($username) !== false) {
+        header("location: ../signup.php?error=invalidusername");
         exit();
     }
     if (invalidEmail($email) !== false) {
@@ -26,10 +26,10 @@ if (isset($_POST['submit'])) {
         exit();
     }
     if (passwordMatch($password, $password_retype) !== false) {
-        header("location: ../signup.php?error=passworddontmatch");
+        header("location: ../signup.php?error=passwordsdontmatch");
         exit();
     }
-    if (useridExists($conn, $username, $email) !== false) {
+    if (usernameExists($conn, $username, $email) !== false) {
         header("location: ../signup.php?error=usernametaken");
         exit();
     }

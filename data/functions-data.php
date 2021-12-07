@@ -11,7 +11,7 @@ function emptyInputSignup($fullname, $email, $username, $password, $password_ret
     return $result;
 }
 
-function invalidUserid($username){
+function invalidUsername($username){
     $result;
     if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
         $result = true;
@@ -41,8 +41,8 @@ function passwordMatch($password, $password_retype) {
     return $result;
 }
 
-function useridExists($conn, $username, $email) {
-    $sql = "SELECT * FROM users WHERE userid = ? OR email = ?;";
+function usernameExists($conn, $username, $email) {
+    $sql = "SELECT * FROM users WHERE username = ? OR email = ?;";
     $stmt = mysqli_stmt_init($conn);
 
     if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -81,4 +81,41 @@ function createUser($conn, $fullname, $email, $username, $password) {
     mysqli_stmt_close($stmt);
     header("location: ../signup.php?error=none");
     exit();
+}
+
+// Login empty input
+
+function emptyInputLogin($username, $password) {
+    $result;
+    if (empty($username) || empty($password) ) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+
+    return $result;
+}
+
+function loginUser($conn, $username, $password) {
+    $usernameExists = usernameExists($conn, $username, $username);
+
+    if ($usernameExists === false) {
+        header("location: ../login.php?error=wronglogin");
+        exit();
+    }
+
+    $passwordHashed = $usernameExists["password"];
+    $checkPassword = password_verify($password, $passwordHashed);
+
+    if ($usernameExists == false) {
+        header("location: ../login.php?error=wronglogin");
+        exit();
+    }
+    else if ($checkPassword == true) {
+        session_start();
+        $_SESSION["username"] = $useridExists["username"];
+        $_SESSION["username"] = $usernameExists["username"];
+        header("location: ../index.php");
+        exit();
+    }
 }
