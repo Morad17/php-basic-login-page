@@ -31,3 +31,32 @@ p {
 li{
     list-style: none;
 }
+
+.submit-button{
+    width: 10vw;
+    height: 4vw;
+    font-size: 18px;
+    background-color: rgb(8, 34, 34);
+    border: none;
+    color: white;
+    border-radius: 10px;
+}
+
+/*----SignUp Page----*/
+
+.signup-section{
+    text-align: center;
+}
+
+.signup-section h2{
+    font-size: 40px;
+}
+
+
+.signup-form input{
+    width: 30%;
+    font-size: 22px;
+    display: block;
+    margin: 13px auto;
+    border-radius: 6px;
+}

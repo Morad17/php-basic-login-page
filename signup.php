@@ -1,34 +1,28 @@
 <?php
-    include 'dbh.php';
-
-    $first = $_POST['user_first'];
-    $last = $_POST['last'];
-    $email = $_POST['email'];
-    $password = $_POST['user_pwd'];
-
-    $sql = "INSERT INTO users (user_first, user_last, user_email, user_pwd) VALUES ('$first', '$last', '$email', '$password');";
-
-    mysqli_query($conn , $sql);
-
-    header("Location: index.php?signup=success");
-
+    include 'header.php';
 ?>
 
-<section>
+<section class="signup-section">
     <h2>Sign Up</h2>
-    <form class="signup-form" action="index.html">
-
+    <form class="signup-form" action="data/signup-data.php" method="POST">
+        <input type="text" name="fullname" placeholder="Full Name">
+        <input type="text" name="email" placeholder="Email">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password_retype" name="password_retype" placeholder="Retype Password">
+        <button class="submit-button" type="submit" name="submit">Sign Up</button>
     </form>
+
 </section>
 
-<!-- <form action="signup.php" Method="POST">
-    <input type="text" name="user_first" placeholder="first name">
-    <br>
-    <input type="text" name="user_last" placeholder="last name">
-    <br>
-    <input type="text" name="user_email" placeholder="email">
-    <br>
-    <input type="text" name="user_pwd" placeholder="password">
-    <br>
-    <button type="submit">Sign Up</button>
-</form> -->
+<?php
+if(isset($_GET["error"])){
+
+    if($_GET["error"] == "emptyinput") {
+        echo "<p>Fill in all the fields!</p>";
+    }
+    else if ($_GET["error"] == "invalid")
+}
+
+
+?>
